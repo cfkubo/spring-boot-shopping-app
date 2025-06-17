@@ -194,6 +194,19 @@ curl -b cookies.txt  -X GET "http://localhost:8081/api/cart"
 Replace IDs and field values as needed for your data.
 
 
+
+```
+docker exec postgres env PGPASSWORD=postgres pg_dump -U postgres -d postgres > mydatabase_backup.sql
+```
+
+```
+PGPASSWORD=postgres docker exec -i postgres psql -U postgres -c "CREATE DATABASE restored_db;"
+```
+
+```
+PGPASSWORD=postgres docker exec -i postgres psql -U postgres -d restored_db < mydatabase_backup.sql
+```
+
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.# spring-boot-shopping-app
