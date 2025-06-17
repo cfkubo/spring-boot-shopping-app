@@ -69,8 +69,11 @@ public class MainView extends VerticalLayout {
         this.cartService = cartService;
 
         setSizeFull();
+        Button goToCart = new Button("Go to Cart", e -> getUI().ifPresent(ui -> ui.navigate("cart")));
+        goToCart.addThemeName("primary"); // Makes the button blue
+        add(goToCart, productGrid); // Add button before the grid
+        
         configureGrid();
-        add(productGrid, new Button("Go to Cart", e -> getUI().ifPresent(ui -> ui.navigate("cart"))));
         loadProducts();
     }
 
