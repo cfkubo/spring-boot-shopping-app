@@ -130,6 +130,17 @@ You can interact with the REST API using tools like `curl` or Postman.
   curl -X DELETE http://localhost:8080/api/products/1
   ```
 
+```
+curl -c cookies.txt -X POST "http://localhost:8081/api/cart/add?productId=4&quantity=10"
+```
+Product added to cart%
+                                                             
+```
+curl -b cookies.txt  -X GET "http://localhost:8081/api/cart"
+```
+
+[{"id":null,"order":null,"productId":4,"quantity":10,"price":4048.06}]%     
+
 ### Orders
 
 - **Place a new order**
