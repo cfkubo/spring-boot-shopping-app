@@ -14,7 +14,7 @@ This project is a Spring Boot application that simulates a shopping experience u
 
 ### Prerequisites
 
-- Java 11 or higher
+- Java 21 or higher
 - Maven
 - PostgreSQL database
 
