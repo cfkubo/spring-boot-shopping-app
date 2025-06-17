@@ -63,3 +63,7 @@ server*.dat
 *.swo
 
 frontend/
+
+cookies*.txt
+
+mydatabase_backup.sql
