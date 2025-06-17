@@ -58,6 +58,7 @@ import com.example.shopping.service.CartService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,13 +80,20 @@ public class CartView extends VerticalLayout {
         Button checkoutButton = new Button("Checkout", e -> {
             getUI().ifPresent(ui -> ui.navigate("checkout"));
         });
+        checkoutButton.addThemeName("primary");
 
         Button clearButton = new Button("Clear Cart", e -> {
             cartService.clearCart();
             cartGrid.setItems(cartService.getCartItems());
             Notification.show("Cart cleared!");
         });
+        clearButton.addThemeName("primary");
 
-        add(cartGrid, checkoutButton, clearButton);
+        // HorizontalLayout topRow = new HorizontalLayout(checkoutButton, clearButton);
+        // topRow.setAlignItems(Alignment.END);
+
+        add(checkoutButton, clearButton, cartGrid);
     }
 }
+
+

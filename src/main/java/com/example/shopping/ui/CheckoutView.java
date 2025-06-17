@@ -25,6 +25,7 @@ public class CheckoutView extends FormLayout {
     private TextField shippingAddress = new TextField("Shipping Address");
     private TextField billingAddress = new TextField("Billing Address");
     private Button placeOrderButton = new Button("Place Order");
+    
 
     @Autowired
     public CheckoutView(OrderService orderService, CartService cartService) {
@@ -33,6 +34,7 @@ public class CheckoutView extends FormLayout {
 
         add(customerName, customerEmail, shippingAddress, billingAddress, placeOrderButton);
         placeOrderButton.addClickListener(e -> placeOrder());
+        placeOrderButton.addThemeName("primary");  
     }
 
     private void placeOrder() {

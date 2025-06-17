@@ -130,6 +130,17 @@ You can interact with the REST API using tools like `curl` or Postman.
   curl -X DELETE http://localhost:8080/api/products/1
   ```
 
+```
+curl -c cookies.txt -X POST "http://localhost:8081/api/cart/add?productId=4&quantity=10"
+```
+Product added to cart%
+                                                             
+```
+curl -b cookies.txt  -X GET "http://localhost:8081/api/cart"
+```
+
+[{"id":null,"order":null,"productId":4,"quantity":10,"price":4048.06}]%     
+
 ### Orders
 
 - **Place a new order**
@@ -182,6 +193,19 @@ You can interact with the REST API using tools like `curl` or Postman.
 
 Replace IDs and field values as needed for your data.
 
+
+
+```
+docker exec postgres env PGPASSWORD=postgres pg_dump -U postgres -d postgres > mydatabase_backup.sql
+```
+
+```
+PGPASSWORD=postgres docker exec -i postgres psql -U postgres -c "CREATE DATABASE restored_db;"
+```
+
+```
+PGPASSWORD=postgres docker exec -i postgres psql -U postgres -d restored_db < mydatabase_backup.sql
+```
 
 ## License
 
