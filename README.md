@@ -103,6 +103,37 @@ curl -b cookies.txt  -X GET "http://localhost:8081/api/cart"
 
 ### Orders
 
+```
+# Add to cart (write cookies)
+curl -c cookies.txt -X POST "http://localhost:8081/api/cart/add?productId=4&quantity=10"
+
+# Check cart (read cookies)
+curl -b cookies.txt -X GET "http://localhost:8081/api/cart"
+
+# Place order (read cookies)
+curl -b cookies.txt -X POST http://localhost:8081/api/orders/from-cart \
+  -H "Content-Type: application/json" \
+  -d '{
+    "customerId": 144,
+    "customerName": "arul vannala",
+    "customerEmail": "arul@braodcom.com",
+    "orderDate": "2025-06-14T12:00:00",
+    "totalAmount": 40480.60,
+    "currency": "USD",
+    "orderStatus": "NEW",
+    "shippingAddress": "123 Main St",
+    "billingAddress": "123 Main St",
+    "paymentMethod": "Credit Card",
+    "transactionId": "TXN123456",
+    "shippingCost": 5.00,
+    "discountAmount": 0.00,
+    "estimatedDeliveryDate": "2025-06-20T12:00:00",
+    "actualDeliveryDate": null,
+    "notes": "Please deliver between 9am-5pm"
+  }'
+```
+
+
 - **Place a new order**
   ```sh
   curl -X POST http://localhost:8081/api/orders \
