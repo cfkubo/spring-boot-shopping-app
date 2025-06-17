@@ -2,46 +2,6 @@
 
 This project is a Spring Boot application that simulates a shopping experience using Vaadin for the user interface. Users can browse products, add them to their cart, and place orders. The application also provides REST API endpoints for managing products and orders, allowing for performance testing and integration with other systems.
 
-## Project Structure
-
-The project is organized as follows:
-
-```
-shopping-simulation-app
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com
-│   │   │       └── example
-│   │   │           └── shopping
-│   │   │               ├── ShoppingSimulationApp.java
-│   │   │               ├── config
-│   │   │               │   └── VaadinConfig.java
-│   │   │               ├── controller
-│   │   │               │   ├── ApiOrderController.java
-│   │   │               │   └── ProductController.java
-│   │   │               ├── model
-│   │   │               │   ├── NewProduct.java
-│   │   │               │   ├── NewOrder.java
-│   │   │               │   └── OrderItem.java
-│   │   │               ├── repository
-│   │   │               │   ├── NewProductRepository.java
-│   │   │               │   ├── NewOrderRepository.java
-│   │   │               │   └── OrderItemRepository.java
-│   │   │               ├── service
-│   │   │               │   ├── OrderService.java
-│   │   │               │   └── ProductService.java
-│   │   │               └── ui
-│   │   │                   ├── MainView.java
-│   │   │                   ├── CartView.java
-│   │   │                   └── CheckoutView.java
-│   │   └── resources
-│   │       ├── application.properties
-│   │       └── db
-│   │           └── schema.sql
-├── pom.xml
-└── README.md
-```
 
 ## Features
 
