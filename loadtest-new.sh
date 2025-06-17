@@ -4,7 +4,7 @@ API_URL="http://localhost:8081/api/products"
 CART_ADD_URL="http://localhost:8081/api/cart/add"
 CART_GET_URL="http://localhost:8081/api/cart"
 ORDER_URL="http://localhost:8081/api/orders/from-cart"
-ORDER_COUNT=10 # Number of concurrent orders to place
+ORDER_COUNT=10000 # Number of concurrent orders to place
 
 # Fetch products and extract the first product ID
 PRODUCT_IDS=($(curl -s $API_URL | jq '.[0:2][] | .productId'))
