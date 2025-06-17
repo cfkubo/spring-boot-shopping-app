@@ -41,6 +41,11 @@ This project is a Spring Boot application that simulates a shopping experience u
 mvn clean package -Pproduction -Dvaadin.force.production.build=true
 ```
 
+
+```
+jar tvf target/shopping-simulation-app-1.0-SNAPSHOT.jar | grep META-INF/VAADIN/
+```
+
    ```
    mvn clean install
    ```
@@ -202,6 +207,84 @@ PGPASSWORD=postgres docker exec -i postgres psql -U postgres -c "CREATE DATABASE
 ```
 PGPASSWORD=postgres docker exec -i postgres psql -U postgres -d restored_db < mydatabase_backup.sql
 ```
+
+## Deploying to Cloud Foundry
+
+You can deploy this application to Cloud Foundry using the following steps:
+
+### 1. Build the Application
+
+Build the production JAR with Vaadin frontend:
+
+```sh
+mvn clean package -Pproduction -Dvaadin.force.production.build=true
+```
+
+### 2. Verify the Build
+
+Check that the Vaadin frontend resources are packaged in the JAR:
+
+```sh
+jar tvf target/shopping-simulation-app-1.0-SNAPSHOT.jar | grep META-INF/VAADIN/
+```
+
+You should see a list of VAADIN resources if the build was successful.
+
+### 3. Create a postgresdb
+
+```
+cf create-service postgres on-demand-plan postgresdb
+```
+
+### 3. Prepare the Manifest File
+
+You can leverage the existing `manifest.yml` in your project root with content similar to:
+
+```yaml
+---
+applications:
+- name: pg-shopping-app 
+  memory: 1G
+  instances: 1
+  path: target/shopping-simulation-app-1.0-SNAPSHOT.jar
+  buildpack: java_buildpack_offline
+  services:
+  - postgresdb
+
+  env:
+    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
+    SPRING_PROFILES_ACTIVE: cloud,on-demand
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 21.+ } }'
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
+    VAADIN_PRODUCTION_MODE: true
+```
+
+### 4. Push to Cloud Foundry
+
+Log in to your Cloud Foundry environment and push the app:
+
+```sh
+cf login
+cf push
+```
+
+### 5. Verify Deployment
+
+After deployment, check your app status:
+
+```sh
+cf apps
+```
+
+Visit the route provided by Cloud Foundry to access your application.
+
+---
+
+**Note:**  
+- Make sure your database (e.g., PostgreSQL) is accessible from Cloud Foundry and credentials are set via environment variables or `application.properties`.
+- Adjust the manifest as needed for your environment (memory, services, etc.).
+
+---
 
 ## License
 
