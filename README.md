@@ -36,6 +36,11 @@ This project is a Spring Boot application that simulates a shopping experience u
 3. Create the database schema by running the SQL script located in `src/main/resources/db/schema.sql`.
 
 4. Build the project using Maven:
+
+```
+mvn clean package -Pproduction -Dvaadin.force.production.build=true
+```
+
    ```
    mvn clean install
    ```
