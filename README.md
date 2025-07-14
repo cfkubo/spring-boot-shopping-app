@@ -20,6 +20,13 @@ This project is a Spring Boot application that simulates a shopping experience u
 
 ### Setup Instructions
 
+1. Postgres 
+
+```
+docker run  -d --name postgres -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres debezium/example-postgres:2.3.3.Final
+```
+
+
 1. Clone the repository:
    ```
    git clone <repository-url>
@@ -194,7 +201,7 @@ curl -b cookies.txt -X POST http://localhost:8081/api/orders/from-cart \
 
 Replace IDs and field values as needed for your data.
 
-
+#### Backup and Restore Postgres via pg_dump
 
 ```
 docker exec postgres env PGPASSWORD=postgres pg_dump -U postgres -d postgres > mydatabase_backup.sql
